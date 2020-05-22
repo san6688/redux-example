@@ -1,13 +1,18 @@
 import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import GalleryReducer from './GalleryReducer';
+import TodoReducer from './Todo/TodoReducer';
 import CreateSagaMiddleware from 'redux-saga';
 import GalleryWatcher from './GallerySaga';
+import todoSagaWatcher from './Todo/TodoSaga'
 
 const sagaMiddleware = CreateSagaMiddleware();
 
-const store = createStore(GalleryReducer,applyMiddleware(sagaMiddleware));
+const store = createStore(combineReducers({
+  todos: TodoReducer,
+  gallery: GalleryReducer,
+}),applyMiddleware(sagaMiddleware));
 
-sagaMiddleware.run(GalleryWatcher);
+sagaMiddleware.run(todoSagaWatcher);
 
 export default store;

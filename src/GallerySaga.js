@@ -1,4 +1,4 @@
-import { takeEvery, put, call } from 'redux-saga/effects';
+import { takeEvery, put, call, takeLatest } from 'redux-saga/effects';
 import { FETCH_PHOTOS_REQUEST } from './GalleryActionType';
 import { getPhotosSuccess } from './GalleryActions';
 import axios from "axios";
@@ -8,13 +8,10 @@ export default function* galleryWatcher(){
 }
 
 function* getPhotosWorker(){
-  //api call;
   const response = yield call(getPhotosFromApi);
-  //dispatching new action to reducer
-  yield put(getPhotosSuccess(response.data))
-
+  yield put(getPhotosSuccess(response.data));
 }
 
-function getPhotosFromApi(){
+function getPhotosFromApi(){  
   return axios.get('https://picsum.photos/v2/list?page=1&limit=10');
 }

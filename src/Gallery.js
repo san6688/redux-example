@@ -15,7 +15,7 @@ const Gallery = (props) => {
         props.isFetching && <div align="center" style={{ paddingTop: 20}}><CircularProgress /></div>
       }
       {
-        !props.isFetching && props.photos?.map((_photo) => <img src={_photo.download_url} height='100' width='100' style={{margin:20}}/>)
+        !props.isFetching && props.photos?.map((_photo, index) => <img key={index} src={_photo.download_url} height='100' width='100' style={{margin:20}}/>)
       }
       </div>
     </div>
@@ -23,7 +23,7 @@ const Gallery = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  //console.log(state);
   return {
     photos:state.get('photos'),
     isFetching: state.get('isFetching'),
