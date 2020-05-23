@@ -31,3 +31,16 @@ export const updateCompletedSuccess = () => {
     type: TodoActionTypes.UPDATE_TODO_COMPLETE_SUCCESS
   }
 }
+
+export const deleteItemAction = (id) => {
+  return {
+    type: TodoActionTypes.DELETE_ITEM,
+    payload: { id } 
+  }
+}
+
+export const deleteItemSucess = () => {
+  return {
+    type: TodoActionTypes.DELETE_ITEM_SUCCESS
+  }
+}
